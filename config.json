@@ -1,0 +1,9 @@
+{
+  "devicetoken": [
+    "要推送设备的 devicetoken"
+  ],
+  "bundle": "项目 bundle ID",
+  "cert": "./你的推送证书.pem",
+  "key": "./你的推送证书密钥.pem",
+  "production": false
+}
