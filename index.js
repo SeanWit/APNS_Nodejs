@@ -13,7 +13,7 @@ const PRODUCTION = config.production;
 let options = {  // 推送服务设置选项
   cert: CERT,
   key: KEY,
-  production: false, //推送环境 true 为正式 false 为测试
+  production: PRODUCTION, //推送环境 true 为正式 false 为测试
   enhanced: true,
   debug: true,
 }
@@ -21,24 +21,35 @@ let options = {  // 推送服务设置选项
 let service = new apn.Provider(options);
 
 let note = new apn.Notification({
-  alert: 'test push, 收到了吗？ by 高翔',
+  alert: '推送测试, 收到了吗？收到的话快告诉高翔',
 });
 
 note.topic = BUNDLE_ID;
 
-console.log(`Send: ${note.compile()} to ${TOKEN}`);
+console.log('开始推送 ... ... ')
+if(PRODUCTION) {
+  console.log('当前推送环境为正式');
+} else {
+  console.log('当前推送环境为测试');
+}
+
+console.log(`推送: ${note.compile()} to ${TOKEN}`);
 service.send(note, TOKEN).then( (result) => {
   let sent = result.sent;
   let failed = result.failed;
   console.log('成功: ', result.sent.length);
   console.log('失败: ', result.failed.length);
-  console.log(result.failed);
-  if(failed.length = 0) {
-    console.log('发送成功设备:  ' + result.sent);
+  if(failed.length == 0) {
+    for(var i = 0; i <= result.sent.length; i++) {
+      console.log('推送成功设备:  ' + result.sent[i].device);
+    }
   }else {
-    console.log('发送失败!');
-    console.log(result.failed);
+    console.log('推送失败!');
+    for(var i = 0; i <= result.failed.length; i++) {
+      console.log('失败设备: ' + result.failed[i].device + ' 状态码 ' + result.failed[i].status + ' 失败原因: ' + result.failed[i].response.reason +'\n');
+    }
   }
+  console.log(result);
 });
 
 service.shutdown();

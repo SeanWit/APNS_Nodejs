@@ -1,9 +1,10 @@
 {
   "devicetoken": [
-    "要推送设备的 devicetoken"
+    "e10df652103307ffa8bc505901a7b3bc2655c93abb0b7d0576005fcc4e882a4b",
+    "4813fa34b972ab917770a2bd7fafa50f2a6659ea66a015d0aba4e67770afb3e1"
   ],
-  "bundle": "项目 bundle ID",
-  "cert": "./你的推送证书.pem",
-  "key": "./你的推送证书密钥.pem",
+  "bundle": "RedPackage",
+  "cert": "./red_dev_cert.pem",
+  "key": "./red_dev_key.pem",
   "production": false
 }
